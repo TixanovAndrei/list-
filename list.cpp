@@ -1,12 +1,15 @@
 #include "list.h"
 
-List::List(int data)
+List::List()
 {
-	head = new Node(data);
-    size = 1;
+    size = 0;
 }
 List::~List()
 {
+	if(size == 0)
+	{
+		cout << "List is empty\n";
+	}
 	Node* tail = new Node(0);
 	while(head)
 	{
@@ -14,19 +17,30 @@ List::~List()
 		delete head;
 		head = tail;
 	}
+	delete tail;
 }
 void List::pushBack(int data)
 {
+	if(size == 0)
+	{
+		head = new Node(data);
+	}
 	Node* tail = head;
-	while(tail->next)
+	tail = tail->next;
+	while(tail != nullptr)
 	{
 		tail = tail->next;
 	}
-	tail->next = new Node(data);
+	tail = new Node(data);
 	size += 1;
 }
 void List::printList()
 {
+	if(size == 0)
+	{
+		cout << "List is empty" << "\n";
+		return;
+	}
 	Node* node = head;
 	while(node != nullptr)
 	{
@@ -35,11 +49,26 @@ void List::printList()
 	}
 	cout << "\n";
 }
+Node* List::pop()
+{
+	if(size == 0)
+	{
+		cout << "List is empty\n";
+		return nullptr;
+	}
+	Node* ans = head;
+	head = head->next;
+	size -= 1;
+	return ans;
+}
 int main()
 {
-	List list = List(5);
+	List list = List();
 	list.pushBack(10);
 	list.printList();
+	Node* node = list.pop();
+	list.printList();
+	cout << node->value << "\n";
 
 	return 0;
 

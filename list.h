@@ -22,17 +22,16 @@ struct Node {
 
 class List {
 public:
-    List(int data);
+    List();
     ~List();
-    int pop();
+    Node* pop();
     void printList();
     void pushBack(int data);
-    int popBack();
+    Node* popBack();
     Node* search(int k);
     int getSize(){return size;}
     Node* getHead(){return head;}
 private:
-
 
     int size;
     Node* head = nullptr;
