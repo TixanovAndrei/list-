@@ -8,7 +8,7 @@ List::~List()
 {
 	if(size == 0)
 	{
-		cout << "List is empty\n";
+		return;
 	}
 	Node* tail = new Node(0);
 	while(head)
@@ -24,14 +24,15 @@ void List::pushBack(int data)
 	if(size == 0)
 	{
 		head = new Node(data);
+		size = 1;
+		return;
 	}
 	Node* tail = head;
-	tail = tail->next;
-	while(tail != nullptr)
+	while(tail->next != nullptr)
 	{
 		tail = tail->next;
 	}
-	tail = new Node(data);
+	tail->next = new Node(data);
 	size += 1;
 }
 void List::printList()
@@ -42,6 +43,8 @@ void List::printList()
 		return;
 	}
 	Node* node = head;
+	cout << node->value << " ";
+	node = node->next;
 	while(node != nullptr)
 	{
 		cout << node->value << " ";
@@ -61,15 +64,36 @@ Node* List::pop()
 	size -= 1;
 	return ans;
 }
+Node* List::popBack()
+{
+	if(size == 0)
+	{
+		cout << "List is empty\n";
+		return nullptr;
+	}
+	Node* tail = head;
+	while(tail->next != nullptr)
+	{
+		tail = tail->next;
+	}
+	size -= 1;
+	return tail;
+}
+bool List::isEmpty()
+{
+	if(size == 0)
+		return 1;
+	return 0;
+}
 int main()
 {
 	List list = List();
-	list.pushBack(10);
+	list.pushBack(2);
+	list.pushBack(3);
 	list.printList();
-	Node* node = list.pop();
+	cout << list.popBack()->value << "\n";
+	cout << list.pop()->value << "\n";
 	list.printList();
-	cout << node->value << "\n";
-
+	list.~List();
 	return 0;
-
 }

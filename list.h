@@ -31,8 +31,8 @@ public:
     Node* search(int k);
     int getSize(){return size;}
     Node* getHead(){return head;}
+    bool isEmpty();
 private:
-
     int size;
     Node* head = nullptr;
 };
