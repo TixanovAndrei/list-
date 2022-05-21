@@ -4,6 +4,7 @@ List::List()
 {
     size = 0;
 }
+
 List::~List()
 {
 	if(size == 0)
@@ -19,6 +20,7 @@ List::~List()
 	}
 	delete tail;
 }
+
 void List::pushBack(int data)
 {
 	if(size == 0)
@@ -35,6 +37,7 @@ void List::pushBack(int data)
 	tail->next = new Node(data);
 	size += 1;
 }
+
 void List::printList()
 {
 	if(size == 0)
@@ -52,6 +55,7 @@ void List::printList()
 	}
 	cout << "\n";
 }
+
 Node* List::pop()
 {
 	if(size == 0)
@@ -64,6 +68,7 @@ Node* List::pop()
 	size -= 1;
 	return ans;
 }
+
 Node* List::popBack()
 {
 	if(size == 0)
@@ -79,21 +84,32 @@ Node* List::popBack()
 	size -= 1;
 	return tail;
 }
+
 bool List::isEmpty()
 {
 	if(size == 0)
 		return 1;
 	return 0;
 }
-int main()
+
+Node* List::search(int k)
 {
-	List list = List();
-	list.pushBack(2);
-	list.pushBack(3);
-	list.printList();
-	cout << list.popBack()->value << "\n";
-	cout << list.pop()->value << "\n";
-	list.printList();
-	list.~List();
-	return 0;
+	if(size == 0)
+	{
+		cout << "List is empty\n";
+		return nullptr;
+	}
+	Node* tail = head;
+	if(size < k)
+	{
+		cout << "Element with number " << k << " doesn't exist\n";
+		return nullptr;
+	}
+	while(k != 1)
+	{
+		tail = tail->next;
+		--k;
+	}
+	return tail;
 }
+
