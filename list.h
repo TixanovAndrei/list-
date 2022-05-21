@@ -1,25 +1,41 @@
 #ifndef _LIST_H_
 #define _LIST_H_
+#include <cstring>
+#include <iostream>
+#include <memory>
+using namespace std;
 
 struct Node {
     int value;
-    Node* next;
-    Node(int val): value(val), next(nullptr){}
+    Node* next = nullptr;
+    Node(int data, Node* nextNode)
+    {
+        this->value = data;
+        this->next = nextNode;
+    }
+    Node(int data)
+    {
+        this->value = data;
+    }
+    Node() =default;
 };
 
 class List {
 public:
-    List();
+    List(int data);
     ~List();
-    void push(int data);
     int pop();
+    void printList();
     void pushBack(int data);
     int popBack();
-    void deleteList();
     Node* search(int k);
+    int getSize(){return size;}
+    Node* getHead(){return head;}
 private:
+
+
     int size;
-    Node *head;
+    Node* head = nullptr;
 };
 
 #endif
