@@ -113,3 +113,25 @@ Node* List::search(int k)
 	return tail;
 }
 
+void List::push(int data)
+{
+	if(size == 0)
+	{
+		head = new Node(data);
+		size += 1;
+		return;
+	}
+	Node* tail = new Node(data, head);
+	setHead(tail);
+	size += 1;
+}
+
+int main()
+{
+	List list = List();
+	list.push(2);
+	list.push(3);
+	list.printList();
+	list.~List();
+	return 0;
+}
